@@ -8,7 +8,7 @@ from ultralytics import YOLO
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--image_url", type=str, default=None, help="the url to parse")
+    parser.add_argument("--image_url", type=str, default=None, help="the url of the image to parse")
     parser.add_argument("--show", help="show the result", action="store_true")
     parser.add_argument("--save", help="save the result", action="store_true")
     args = parser.parse_args()
