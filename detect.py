@@ -12,7 +12,7 @@ def main():
     parser.add_argument("--show", help="show the result", action="store_true")
     parser.add_argument("--save", help="save the result", action="store_true")
     args = parser.parse_args()
-
+    
     # Retrieve the image
     if args.image_url is not None:
         response = requests.get(args.image_url)
@@ -42,10 +42,10 @@ def main():
         
     # Visualize the results
     for i, r in enumerate(results):
-        if args.show is not None: 
+        if args.show: 
             r.show()
             
-        if args.save is not None: 
+        if args.save: 
             r.save(filename=f"tmp/results{i}.jpg")
 
 if __name__ == "__main__":
