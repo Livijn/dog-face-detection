@@ -1,19 +1,17 @@
+from pathlib import Path
 import argparse
 import requests
 import cv2
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO
-import warnings
-
-warnings.filterwarnings('ignore')
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_url", type=str, default=None)
     args = parser.parse_args()
 
-    model = YOLO("model.pt")
+    model = YOLO(str(Path(__file__).resolve().parent) + '/model.pt')
 
     # Retrieve the image
     if args.image_url is not None:
@@ -31,8 +29,7 @@ def main():
         class_labels = r.boxes.cls
         for box, confidence, cls in zip(bounding_boxes, confidences, class_labels):
             x_min, y_min, x_max, y_max = box.tolist()
-            print(f"Bounding Box: x_min={x_min}, y_min={y_min}, x_max={x_max}, y_max={y_max}")
-            print(f"Confidence: {confidence.item()}, Class: {cls.item()}")
+            print(f"Bounding Box: x_min={x_min}, y_min={y_min}, x_max={x_max}, y_max={y_max}, conf={confidence.item()}")
         
     # Visualize the results
 #     for i, r in enumerate(results):

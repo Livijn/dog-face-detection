@@ -1,7 +1,11 @@
+setuptools 
+wheel
 numpy
 pandas
 matplotlib
 opencv-python-headless
+torch 
+torchvision
 ultralytics
 keras-cv
 tensorflow
