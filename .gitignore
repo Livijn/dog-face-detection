@@ -1,0 +1,6 @@
+/.idea
+.DS_Store
+/dog_faces_dataset/images/*
+/dog_faces_dataset/labels/*
+/Support
+yolo11n.pt

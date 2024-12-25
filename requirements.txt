@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+opencv-python-headless
+ultralytics
+keras-cv
+tensorflow
+requests
+Pillow
+onnx
