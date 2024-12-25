@@ -17,7 +17,7 @@ def main():
         image_array = np.frombuffer(response.content, np.uint8)
         img = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
         height, width, *_ = img.shape
-        print(f"height={height}, width={width}")
+        print(f"width={width}, height={height}")
     else:
         raise ValueError("Must provide --image_url")
 
