@@ -39,9 +39,9 @@ def main():
             print(f"Bounding Box: x_center={x_center_percentage:.2f}%, y_center={y_center_percentage:.2f}%, x_min={x_min}, y_min={y_min}, x_max={x_max}, y_max={y_max}, conf={confidence.item()}")
         
     # Visualize the results
-#     for i, r in enumerate(results):
-#         r.show()
-#         r.save(filename=f"results{i}.jpg")
+    for i, r in enumerate(results):
+        #r.show()
+        r.save(filename=f"tmp/results{i}.jpg")
 
 if __name__ == "__main__":
     main()
