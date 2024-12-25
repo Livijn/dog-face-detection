@@ -11,25 +11,32 @@ def main():
     parser.add_argument("--image_url", type=str, default=None)
     args = parser.parse_args()
 
-    model = YOLO(str(Path(__file__).resolve().parent) + '/model.pt')
-
     # Retrieve the image
     if args.image_url is not None:
         response = requests.get(args.image_url)
         image_array = np.frombuffer(response.content, np.uint8)
         img = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        height, width, *_ = img.shape
+        print(f"height={height}, width={width}")
     else:
         raise ValueError("Must provide --image_url")
 
+    # Load the model and predict on the image
+    model = YOLO(str(Path(__file__).resolve().parent) + '/model.pt')
     results = model.predict(source=img)
     
+    # Print the results
     for r in results:
         bounding_boxes = r.boxes.xyxy
         confidences = r.boxes.conf
-        class_labels = r.boxes.cls
-        for box, confidence, cls in zip(bounding_boxes, confidences, class_labels):
+        for box, confidence in zip(bounding_boxes, confidences):
             x_min, y_min, x_max, y_max = box.tolist()
-            print(f"Bounding Box: x_min={x_min}, y_min={y_min}, x_max={x_max}, y_max={y_max}, conf={confidence.item()}")
+            x_center = (x_min + x_max) / 2
+            y_center = (y_min + y_max) / 2
+            x_center_percentage = (x_center / width) * 100
+            y_center_percentage = (y_center / height) * 100
+      
+            print(f"Bounding Box: x_center={x_center_percentage:.2f}%, y_center={y_center_percentage:.2f}%, x_min={x_min}, y_min={y_min}, x_max={x_max}, y_max={y_max}, conf={confidence.item()}")
         
     # Visualize the results
 #     for i, r in enumerate(results):
