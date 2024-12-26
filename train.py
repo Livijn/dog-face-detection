@@ -12,14 +12,8 @@ train_results = model.train(
     epochs=30,  # number of training epochs
     imgsz=500,  # training image size
     device="mps",  # device to run on, i.e. device=0 or device=0,1,2,3 or device=cpu
+    resume=True,
 )
 
 # Evaluate model performance on the validation set
 metrics = model.val()
-
-# Perform object detection on an image
-results = model("input_image.jpg")
-results[0].show()
-
-# Export the model to ONNX format
-# path = model.export(format="onnx")  # return path to exported model
